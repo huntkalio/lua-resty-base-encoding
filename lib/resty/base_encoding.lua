@@ -62,6 +62,7 @@ size_t modp_b64w_decode(char* dest, const char* src, size_t len);
 size_t b32_encode(char* dest, const char* src, size_t len, uint32_t no_padding,
     uint32_t hex);
 size_t b32_decode(char* dest, const char* src, size_t len, uint32_t hex);
+int int_b32_decode(char* dest, const char* src, size_t len, uint32_t hex);
 size_t modp_b16_encode(char* dest, const char* str, size_t len,
     uint32_t out_in_lowercase);
 size_t modp_b16_decode(char* dest, const char* src, size_t len);
@@ -209,7 +210,7 @@ local function decode_base32(s, hex)
 
     local dlen = base32_decoded_length(slen)
     local dst = get_string_buf(dlen)
-    local r_dlen = encoding.b32_decode(dst, s, slen, hex)
+    local r_dlen = encoding.int_b32_decode(dst, s, slen, hex)
     if r_dlen == -1 then
         return nil, "invalid input"
     end
